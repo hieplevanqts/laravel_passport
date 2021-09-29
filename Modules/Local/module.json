@@ -1,0 +1,13 @@
+{
+    "name": "Local",
+    "alias": "local",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Local\\Providers\\LocalServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
