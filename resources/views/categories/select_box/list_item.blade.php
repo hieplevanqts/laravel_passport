@@ -6,10 +6,10 @@
 </li>
 
 @if (count($item->children) > 0)
+<ol class="dd-list">
     @foreach ($item->children as $val)
-        <ol class="dd-list">
             @include('categories.select_box.list_item', ['item'=>$val])
-        </ol>
     @endforeach
+</ol>
 
 @endif
