@@ -11,7 +11,7 @@ class CategoryController extends Controller
     public function index()
     {
         // return Category::fixTree();
-        $categories = Category::withDepth()->defaultOrder()->get()->toFlatTree();
+        $categories = Category::withDepth()->having('depth', '>', 0)->defaultOrder()->get()->toTree();
         // dd($categories);
         return view('categories.index', compact('categories'));
     }

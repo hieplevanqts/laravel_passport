@@ -9,7 +9,12 @@
         $level .= $level;
     @endphp
     @foreach ($category->categories as $childCategory)
-        @include('categories.child_category_table', ['category'=>$childCategory])
+        {{-- @include('categories.child_category_table', ['category'=>$childCategory]) --}}
+        <tr>
+            <td>{{ $childCategory->id }}</td>
+            <td>{{ $level . ' ' . $childCategory->name }}</td>
+            <td>@include('categories.order', ['id'=>$childCategory->id])</td>
+        </tr>
     @endforeach
 @endif
 

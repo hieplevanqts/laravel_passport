@@ -13,7 +13,12 @@
     </thead>
     <tbody>
         @foreach ($categories as $category)
-            @include('categories.child_category_table', ['category'=>$category, 'level'=>$level])
+            {{-- @include('categories.child_category_table', ['category'=>$category, 'level'=>$level]) --}}
+            <tr>
+                <td>{{ $category->id }}</td>
+                <td>{{ str_repeat( $level , $category->depth ) }}{{  $category->name }}</td>
+                <td>@include('categories.order', ['id'=>$category->id])</td>
+            </tr>
         @endforeach
     </tbody>
 </table>
