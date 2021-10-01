@@ -22,3 +22,4 @@ Route::get('/', function () {
 
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/categories/move/{id}/{type}', [CategoryController::class, 'move'])->name('category.move');
+Route::post('/categories/update-tree', [CategoryController::class, 'updateTree'])->name('category.updateTree');

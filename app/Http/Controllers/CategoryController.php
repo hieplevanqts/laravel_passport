@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Log;
 
 class CategoryController extends Controller
 {
@@ -11,7 +12,7 @@ class CategoryController extends Controller
     public function index()
     {
         // return Category::fixTree();
-        $categories = Category::withDepth()->having('depth', '>', 0)->defaultOrder()->get()->toTree();
+        $categories = Category::withDepth()->defaultOrder()->get()->toTree();
         // dd($categories);
         return view('categories.index', compact('categories'));
     }
@@ -29,5 +30,13 @@ class CategoryController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function updateTree(Request $request)
+    {
+        $data = $request->data;
+        $root = Category::find(1);
+        Category::rebuildSubtree($root, $data);
+        return response()->json($data);
     }
 }

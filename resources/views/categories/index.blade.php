@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <meta name="csrf-token" content="{{ csrf_token() }}"/>
         <title>Laravel</title>
 
         <!-- Fonts -->
@@ -37,7 +37,7 @@
                     </div>
                 </div> --}}
 
-                <div class="dd" id="dd">
+                <div class="dd" id="dd" data-url="{{route('category.updateTree')}}">
                     <ol class="dd-list">
                         @foreach ($categories as $item)
                             @include('categories.select_box.list_item', ['item'=>$item])
@@ -57,11 +57,26 @@
             let dd = $('#dd')
 
             dd.nestable({  }).on('change', function(){
-
+                let dataOutput = dd.nestable('serialize')
+                Output.val(JSON.stringify(dataOutput))
+                try {
+                    $.ajax({
+                    type: "post",
+                    url: dd.data('url'),
+                    data: {
+                        data: dataOutput,
+                        _token : $('meta[name="csrf-token"]').attr("content")
+                    },
+                    success: function (response) {
+                        console.log(response);
+                    }
+                });
+                } catch (error) {
+                    console.log(error);
+                }
+               
             })
-            var dataOutput = dd.nestable('serialize');
-            console.log(dataOutput);
-            Output.val(JSON.stringify(dataOutput))
+            
         </script>
     </body>
 </html>
