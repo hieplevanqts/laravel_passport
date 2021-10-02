@@ -11,6 +11,7 @@ class Category extends Model
     use HasFactory;
     use NodeTrait;
     protected $with = ['categories'];
+    protected $fillable = ['id'];
     public function categories()
     {
         return $this->hasMany(Category::class, 'parent_id', 'id');
