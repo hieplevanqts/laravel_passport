@@ -18,6 +18,8 @@ Route::group([
             Route::get('/', 'GalleryController@index')->name('gallery.index');
             Route::get('/delete/{id}', 'GalleryController@destroy')->name('gallery.delete');
             Route::get('/add', 'GalleryController@create')->name('gallery.add');
-            Route::post('postadd', 'GalleryController@postAdd')->name('gallery.postAdd');
+            Route::post('/postadd', 'GalleryController@postAdd')->name('gallery.postAdd');
+            Route::post('/handle-upload', 'GalleryController@handleUpload')->name('gallery.handleUpload');
+            Route::post('/sort', 'GalleryController@sort')->name('gallery.sort');
         });
     });

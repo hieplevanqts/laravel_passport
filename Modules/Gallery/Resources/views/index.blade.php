@@ -2,7 +2,7 @@
 @section('title','Thư viện ảnh')
 
 @php
-    use Illuminate\Support\Facades\Config;
+    // use Illuminate\Support\Facades\Config;
     $heading = $title = "Thư viện ảnh";
 $menu = [
         ['label' => 'Danh sách', 'url' => url('admin/gallery'),'options' => ['class' => 'btn btn-info', 'icon'=>'<i class="fa fa-list-alt"></i>']],
@@ -21,9 +21,13 @@ Config::set(['app.menu'=>$menu, 'app.breadcrumb'=>$breadcrumb]);
 @section('content')
 @push('styles')
 <link href="{{ Module::asset('dashboard:css/fix_style.css') }} " rel="stylesheet">
+<link href="{{ Module::asset('gallery:css/fancy-file-uploader/fancy_fileupload.css') }} " rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"/>
+<link rel="stylesheet" href="{{ asset('css/viewbox.css') }}">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 @endpush
 <form method="GET" action="" accept-charset="UTF-8">
-    <div class="card">
+    <div class="card mb-2">
        <div class="card-body">
           <div class="row">
              <div class="col-lg-4">
@@ -44,63 +48,57 @@ Config::set(['app.menu'=>$menu, 'app.breadcrumb'=>$breadcrumb]);
              <div class="col-lg-4">
                 <div class="form-group mb-0"><button type="submit" class="btn btn-info"><i class="fa fa-search"></i> Tìm kiếm</button></div>
              </div>
+             <div class="col-lg-4">
+                 <a href="{{ asset('admin/gallery/add') }}" class="btn btn-success pull-right">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Thêm mới
+                </a>
+             </div>
           </div>
        </div>
     </div>
  </form>
  <div class="card">
     <div class="card-body">
-	<div class="row">
-		<div class="row">
+        <input type="hidden" name="page" value="{{ request()->get('page') ? request()->get('page') : 1 }}">
+        <input type="hidden" name="limit" value="{{ request()->get('limit') ? request()->get('limit') : 20 }}">
+	    <div class="row" id="sortable">
             @foreach ($list as $value)
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb mt-3">
-                <a class="thumbnail" href="#" data-image-id="{{ @$value->id }}" data-toggle="modal" data-title=""
-                   data-image="{{ $value->url }}"
-                   data-target="#image-gallery">
-                    <img class="img-thumbnail"
-                         src="{{ $value->url }}"
-                         alt="Another alt text">
-                </a>
-                <div class="background_above">
-                    <a class="thumbnail" href="javascript:void(0)" data-toggle="modal" data-title="" data-image="{{ $value->url }}" data-target="#image-gallery"><i class="far fa-eye"></i></a>
-                    <a onclick="deleteGalleryItem(this, {{ @$value->id }})" href="javascript:void(0)">
-                        <i class="fas fa-times"></i>
-                    </a>
-                </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb mt-3" data-index="{{ @$value->id }}" data-position="{{ @$value->sort }}">
+                    <div class="wraper-action">
+                        <a href="{{  URL::to('/').'/'.$value->url }}" class="image-link"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <i onclick="deleteGalleryItem(this, {{ @$value->id }})" class="fa fa-trash" aria-hidden="true"></i>
+                    </div>
+                    <img src="{{  URL::to('/').'/'.$value->url }}" alt="{{ $value->alt }}">
+
             </div>
             @endforeach
+</div>
+<div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="image-gallery-title"></h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img id="image-gallery-image" class="img-responsive col-md-12" src="">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary float-left" id="show-previous-image"><i class="fa fa-arrow-left"></i>
+                </button>
 
-
-
-        </div>
-        <div class="clearfix"></div>
-        <div class="text-center pagination__link">
-            {{ @$list->appends(['_token'=>@$_GET['_token'], 'module' => @$_GET['module']])->links() }}
-        </div>
-
-        <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="image-gallery-title"></h4>
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <img id="image-gallery-image" class="img-responsive col-md-12" src="">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary float-left" id="show-previous-image"><i class="fa fa-arrow-left"></i>
-                        </button>
-
-                        <button type="button" id="show-next-image" class="btn btn-secondary float-right"><i class="fa fa-arrow-right"></i>
-                        </button>
-                    </div>
-                </div>
+                <button type="button" id="show-next-image" class="btn btn-secondary float-right"><i class="fa fa-arrow-right"></i>
+                </button>
             </div>
         </div>
+    </div>
 </div>
+<div class="clearfix"></div>
+<div class="text-center pagination__link">
+    {{ @$list->appends(['_token'=>@$_GET['_token'], 'module' => @$_GET['module']])->links() }}
 
+</div>
 </div>
 </div>
 
@@ -109,11 +107,69 @@ Config::set(['app.menu'=>$menu, 'app.breadcrumb'=>$breadcrumb]);
 @section('script')
 @parent
 <script src="{{ Module::asset('gallery:js/jquery.fancy-fileupload.js') }}"></script>
+<script src="{{ asset('js/jquery.viewbox.min.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 <script>
     let modalId = $('#image-gallery');
+    var page = $('input[name="page"]').val();
+    var limit = $('input[name="limit"]').val();
+    var base = $("#base").val()
+    var token = $("meta[name='csrf-token']").attr('content');
+    $(function(){
+        $( "#sortable" ).sortable({
+            opacity: 0.6,
+            cursor: 'move',
+            update: function(event, ui) {
+                var order = $(this).sortable("serialize") + '&action=updateRecordsListings';
+                $(this).children().each(function(index){
+                    if($(this).attr('data-position') != (index + 1))
+                    {
+                        $(this).attr('data-position', (index + 1)).addClass('updated')
+                    }
+                });
+                saveNewPosition();
+                // $.post("/plugins/drag/updateDB.php", order);
+            }
+        })
+    });
 
+    function saveNewPosition() {
+        var positions = [];
+        $('.updated').each(function(){
+            positions.push([$(this).attr('data-index'), $(this).attr('data-position')])
+            $(this).removeClass('updated');
+        })
+        console.log(positions);
+        $.ajax({
+            type: "post",
+            url: base + "/admin/gallery/sort",
+            data: {positions: positions, page : page, limit: limit, _token : token},
+            success: function (response) {
+                console.log(response);
+            }
+        });
+    }
 $(document)
   .ready(function () {
+
+    $(function(){
+	    $('.image-link').viewbox();
+    });
+
+    $(function(){
+        $('.image-link').viewbox({
+            setTitle: true,
+            margin: 20,
+            resizeDuration: 300,
+            openDuration: 200,
+            closeDuration: 200,
+            closeButton: true,
+            navButtons: true,
+            closeOnSideClick: true,
+            nextOnContentClick: true
+        });
+    });
 
     loadGallery(true, 'a.thumbnail');
 

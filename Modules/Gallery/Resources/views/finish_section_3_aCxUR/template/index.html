@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel=icon href=assets/images/icon_zendvn.png sizes="16x16" type="image/png">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ZendVN-Dropzone</title>
+    <!-- Bootstrap -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="assets/fonts/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="assets/css/nprogress.css" rel="stylesheet">
+    <!-- bootstrap-wysiwyg -->
+    <link href="assets/css/prettify.min.css" rel="stylesheet">
+    <!-- Custom styling plus plugins -->
+    <link href="assets/css/custom.min.css" rel="stylesheet">
+    <style>
+        td {
+            vertical-align: middle !important;
+        }
+
+        .btn-icon {
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Aministrator</span></a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- menu profile quick info -->
+                    <div class="profile clearfix">
+                        <div class="profile_pic">
+                            <img src="assets/images/img.jpg" alt="..." class="img-circle profile_img">
+                        </div>
+                        <div class="profile_info">
+                            <span>Welcome,</span>
+                            <h2>ZendVN</h2>
+                        </div>
+                    </div>
+                    <!-- /menu profile quick info -->
+                    <br />
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>General</h3>
+                            <ul class="nav side-menu">
+                                <!-- <li><a><i class="fa fa-home"></i>Thống kê</span></a> -->
+                                <li><a><i class="fa fa-navicon"></i> Quản lý sản phẩm <span
+                                            class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="index.html">Danh sách</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /sidebar menu -->
+                </div>
+            </div>
+
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+                    <nav class="nav navbar-nav">
+                        <ul class=" navbar-right">
+                            <li class="nav-item dropdown open" style="padding-left: 15px;">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
+                                    id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                                    <img src="assets/images/img.jpg" alt="">John Doe
+                                </a>
+                                <div class="dropdown-menu dropdown-usermenu pull-right"
+                                    aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="javascript:;"> Profile</a>
+                                    <a class="dropdown-item" href="#"><i class="fa fa-sign-out pull-right"></i>
+                                        Log Out</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+
+            <!-- page content -->
+            <div class="right_col" role="main" style="min-height: 2436px;">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>Quản lý sản phẩm</h3>
+                    </div>
+                    <div class="title_right">
+                        <div class="col-md-5 col-sm-5 form-group pull-right top_search text-right">
+                            <a href="add.html" class="btn btn-success"><i class="fa fa-plus-circle"></i> Thêm mới</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Danh sách</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                    <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <div class="table-responsive">
+                                    <table class="table table-striped jambo_table bulk_action">
+                                        <thead>
+                                            <tr class="headings">
+                                                <th class="column-title">STT</th>
+                                                <th class="column-title">Tên sản phẩm</th>
+                                                <th class="column-title">Hình ảnh</th>
+                                                <th class="column-title">Giá sản phẩm</th>
+                                                <th class="column-title no-link last"><span class="nobr">Hành động</span></th>
+                                                <th class="bulk-actions" colspan="7">
+                                                    <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions (
+                                                        <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="even pointer">
+                                                <td class="a-centre">1</td>
+                                                <td>Áo thun nam trơn</td>
+                                                <td>
+                                                    <img src="assets/images/img_main1.png" width="100px" alt="img_main">
+                                                </td>
+                                                <td>120,000đ</td>
+                                                <td class="last">
+                                                    <a href="info.html" type="button" class="btn btn-icon btn-primary"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        data-original-title="View">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    <a href="edit.html" type="button" class="btn btn-icon btn-success"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        data-original-title="Edit">
+                                                        <i class="fa fa-pencil"></i>
+                                                    </a>
+                                                    <a href="#" type="button" class="btn btn-icon btn-danger"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        data-original-title="Delete">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr class="even pointer">
+                                                <td class="a-centre">2</td>
+                                                <td>Áo thun nam bang</td>
+                                                <td>
+                                                    <img src="assets/images/img_main2.png" width="100px" alt="img_main">
+                                                </td>
+                                                <td>125,000đ</td>
+                                                <td class="last">
+                                                    <a href="#" type="button" class="btn btn-icon btn-primary"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        data-original-title="View">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    <a href="#" type="button" class="btn btn-icon btn-success"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        data-original-title="Edit">
+                                                        <i class="fa fa-pencil"></i>
+                                                    </a>
+                                                    <a href="#" type="button" class="btn btn-icon btn-danger"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        data-original-title="Delete">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr class="even pointer">
+                                                <td class="a-centre">3</td>
+                                                <td>Quần sort kaki nam</td>
+                                                <td>
+                                                    <img src="assets/images/img_main3.png" width="100px" alt="img_main">
+                                                </td>
+                                                <td>150,000đ</td>
+                                                <td class="last">
+                                                    <a href="#" type="button" class="btn btn-icon btn-primary"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        data-original-title="View">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    <a href="#" type="button" class="btn btn-icon btn-success"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        data-original-title="Edit">
+                                                        <i class="fa fa-pencil"></i>
+                                                    </a>
+                                                    <a href="#" type="button" class="btn btn-icon btn-danger"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        data-original-title="Delete">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <tr class="even pointer">
+                                                <td class="a-centre">4</td>
+                                                <td>Áo thun nam hàn quốc</td>
+                                                <td>
+                                                    <img src="assets/images/img_main4.png" width="100px" alt="img_main">
+                                                </td>
+                                                <td>255,000đ</td>
+                                                <td class="last">
+                                                    <a href="#" type="button" class="btn btn-icon btn-primary"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        data-original-title="View">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    <a href="#" type="button" class="btn btn-icon btn-success"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        data-original-title="Edit">
+                                                        <i class="fa fa-pencil"></i>
+                                                    </a>
+                                                    <a href="#" type="button" class="btn btn-icon btn-danger"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        data-original-title="Delete">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /page content -->
+
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    Code by <a href="">Duy Khanh</a>
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+
+    <!-- jQuery -->
+    <script src="assets/js/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!-- FastClick -->
+    <script src="assets/js/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="assets/js/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="assets/js/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="assets/js/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="assets/js/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="assets/js/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="assets/js/skycons.js"></script>
+    <!-- Flot -->
+    <script src="assets/js/jquery.flot.js"></script>
+    <script src="assets/js/jquery.flot.pie.js"></script>
+    <script src="assets/js/jquery.flot.time.js"></script>
+    <script src="assets/js/jquery.flot.stack.js"></script>
+    <script src="assets/js/jquery.flot.resize.js"></script>
+    <script src="assets/js/date.js"></script>
+    <script src="assets/js/moment.min.js"></script>
+    <script src="assets/js/daterangepicker.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="assets/js/custom.min.js"></script>
+</body>
+</html>

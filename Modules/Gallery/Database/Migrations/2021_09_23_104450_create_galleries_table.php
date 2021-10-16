@@ -20,6 +20,7 @@ class CreateGalleriesTable extends Migration
             $table->text('alt');
             $table->string('sha1_text')->unique();
             $table->integer('total')->default(0);
+            $table->integer('sort')->default(0);
             $table->timestamps();
         });
     }

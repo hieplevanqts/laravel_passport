@@ -18,6 +18,7 @@ Config::set(['app.menu'=>$menu, 'app.breadcrumb'=>$breadcrumb]);
 @endphp
 @push('styles')
     <link href="{{ Module::asset('gallery:css/fancy-file-uploader/fancy_fileupload.css') }} " rel="stylesheet">
+    <link href="{{ Module::asset('gallery:css/dropzone.min.css') }} " rel="stylesheet">
 @endpush
 
 @section('content')
@@ -47,7 +48,8 @@ Config::set(['app.menu'=>$menu, 'app.breadcrumb'=>$breadcrumb]);
                 </select>
             </div>
             <input type="hidden" id="md" name="md" value=""/>
-            <input id="files" type="file" name="files" accept=".jpg, .png, image/jpeg, image/png" multiple>
+            {{-- <input id="files" type="file" name="files" accept=".jpg, .png, image/jpeg, image/png" multiple> --}}
+            <div class="dropzone" id="dropzone"></div>
             <br />
             <div class="form-group">
                 <button type="submit" class="btn btn-info"><i class="fa fa-save"></i> Thêm mới</button>
@@ -73,25 +75,67 @@ Config::set(['app.menu'=>$menu, 'app.breadcrumb'=>$breadcrumb]);
 <script src="{{ Module::asset('gallery:js/jquery.fileupload.js') }}"></script>
 <script src="{{ Module::asset('gallery:js/jquery.iframe-transport.js') }}"></script>
 <script src="{{ Module::asset('gallery:js/jquery.fancy-fileupload.js') }}"></script>
+<script src="{{ Module::asset('gallery:js/dropzone.min.js') }}"></script>
 <script>
-var files = $("input[name='files']").val();
-var md = $("#module").val()
-var token = $("input[name='_token']").val()
+// var files = $("input[name='files']").val();
+// var md = $("#module").val()
+// var token = $("input[name='_token']").val()
 
-$('#files').FancyFileUpload({
-    'url' : base + '/admin/gallery/postadd',
-    'params' : {files : files, md: md, _token: token},
-    'edit' : false,
-    'maxfilesize' : 1000000,
-    autoUpload:false,
-    maxChunkSize: 10000000,
-        maxFileSize: 1000000000,
-        singleFileUploads: false,
-    'uploadcompleted' :function(e, data) {
-        console.log(data);
-  },
+// $('#files').FancyFileUpload({
+//     'url' : base + '/admin/gallery/postadd',
+//     'params' : {files : files, md: md, _token: token},
+//     'edit' : false,
+//     'maxfilesize' : 1000000,
+//     autoUpload:false,
+//     maxChunkSize: 10000000,
+//         maxFileSize: 1000000000,
+//         singleFileUploads: false,
+//     'uploadcompleted' :function(e, data) {
+//         console.log(data);
+//   },
 
-});
+// });
+
+// $("div#dropzone").dropzone({
+//                     url: "/",
+//                     paramName: "file",
+//                     maxFiles: 2,
+//                     maxFilesize: 2,
+//                 });
+    var base = $("#base").attr('content');
+    var token = $("input[name='_token']").val()
+    var myDropzone = new Dropzone("div#dropzone", {
+        url : base + "/admin/gallery/handle-upload",
+        paramName: "file",
+        maxFiles: 10,
+        maxFilesize: 2,
+        uploadMultiple: true, // uplaod files in a single request
+        parallelUploads: 100, // use it with uploadMultiple
+        acceptedFiles: ".jpg, .jpeg, .png, .gif, .pdf",
+        addRemoveLinks: true,
+        // Language Strings
+        dictFileTooBig: "File is to big ",
+        dictInvalidFileType: "Invalid File Type",
+        dictCancelUpload: "Cancel",
+        dictRemoveFile: "Remove",
+        dictMaxFilesExceeded: "",
+        dictDefaultMessage: "Drop files here to upload",
+        params: {
+                '_token': token,
+            },
+    });
+
+
+    myDropzone.on("addedfile", function(file){
+        console.log(file.size);
+        caption = file.caption == undefined ? "" : file.caption;
+        file._captionBox = Dropzone.createElement("<input type='text' name='alts[]' value="+file.name+" >");
+        file._image = Dropzone.createElement("<input type='hidden' name='images[]' value="+file.name+" >");
+        file._size = Dropzone.createElement("<input type='hidden' name='size[]' value="+file.size+" >");
+        file.previewElement.appendChild(file._captionBox);
+        file.previewElement.appendChild(file._image);
+        file.previewElement.appendChild(file._size);
+    })
 
 </script>
 

@@ -1,0 +1,29 @@
+[
+    {
+        "id": "n4bjHu",
+        "name": "Áo thun nam hàn quốc",
+        "price": "124000",
+        "description": "this is a test",
+        "image_main": {
+            "image": "pcJOiA2xr.png",
+            "alt": "image_main"
+        },
+        "image_extra": [
+            {
+                "image": "jkpQcefiJ.png",
+                "ordering": 1,
+                "alt": ""
+            },
+            {
+                "image": "cSfrBnVWR.png",
+                "ordering": 2,
+                "alt": ""
+            },
+            {
+                "image": "vxijQOF0D.png",
+                "ordering": 3,
+                "alt": ""
+            }
+        ]
+    }
+]

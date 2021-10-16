@@ -1,0 +1,114 @@
+[
+    {
+        "id": "2OYQ9B",
+        "name": "Áo thun nam trơn",
+        "price": "290000",
+        "description": "Chất liệu thun 65% cotton, mềm mịn và tạo cảm giác thoải mái khi mặc. Không ra màu",
+        "images": [
+            {
+                "image": "xhgL3q2IR.png",
+                "ordering": "1",
+                "alt": "img_1"
+            },
+            {
+                "image": "rOnDLT4ZR.png",
+                "ordering": "3",
+                "alt": "img_2"
+            },
+            {
+                "image": "N80ivUBd3.png",
+                "ordering": "2",
+                "alt": "img_3"
+            },
+            {
+                "image": "6bSfhmFnz.png",
+                "ordering": "4",
+                "alt": "img_4"
+            },
+            {
+                "image": "ZrR15Pvpf.png",
+                "ordering": 5,
+                "alt": ""
+            }
+        ]
+    },
+    {
+        "id": "xsjZhT",
+        "name": "Áo thun nam bang",
+        "price": "225000",
+        "description": "Chất liệu: 95% Cotton và 5% Spandex. Kiểu dáng: Form slimfit ôm vừa người, tôn dáng",
+        "images": [
+            {
+                "image": "keMsPEUmY.png",
+                "ordering": 1,
+                "alt": ""
+            },
+            {
+                "image": "QCWZg2Iuj.png",
+                "ordering": 2,
+                "alt": ""
+            },
+            {
+                "image": "UXilJHI41.png",
+                "ordering": 3,
+                "alt": ""
+            }
+        ]
+    },
+    {
+        "id": "0SxtjL",
+        "name": "Áo thun nam hàn quốc",
+        "price": "189000",
+        "description": "95% cotton,5 % spandex. Khả năng thấm hút tốt. Độ co giãn tốt hơn vì có pha thêm sợi Spandex",
+        "images": [
+            {
+                "image": "c76W0dtCJ.png",
+                "ordering": 1,
+                "alt": ""
+            },
+            {
+                "image": "eAXo0KkZR.png",
+                "ordering": 2,
+                "alt": ""
+            },
+            {
+                "image": "vHXYUVPbT.png",
+                "ordering": 3,
+                "alt": ""
+            },
+            {
+                "image": "DhFk0uU7I.png",
+                "ordering": 4,
+                "alt": ""
+            }
+        ]
+    },
+    {
+        "id": "RCV5du",
+        "name": "Quần sort kaki",
+        "price": "199000",
+        "description": "Short kaki, mặc mùa hè cực mát. Vải kaki mềm bảo đảm mặc không bị ngứa, không bị rút vải khi giặt",
+        "images": [
+            {
+                "image": "Y2szCGANU.png",
+                "ordering": 1,
+                "alt": ""
+            },
+            {
+                "image": "GFA1aIZl7.png",
+                "ordering": 2,
+                "alt": ""
+            },
+            {
+                "image": "LN7PDM6pb.png",
+                "ordering": 3,
+                "alt": ""
+            },
+            {
+                "image": "F98hJb2BO.png",
+                "ordering": 4,
+                "alt": ""
+            }
+        ]
+    }
+]

@@ -141,3 +141,65 @@ table tr td:nth-child(2) img{
     clear: both;
     display: table;
   }
+
+  .img-thumbnail{
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: .25rem;
+    width: 300px;
+    height: 250px;
+    object-fit: cover;
+  }
+
+.thumb img{
+    width: 100% !important;
+    height: 250px !important;
+    object-fit: cover;
+}
+.thumb {
+    position: relative;
+}
+.thumb div.wraper-action{
+    background-color: #000;
+    padding: 22px;
+    width: 90px;
+    height: 20px;
+    border-radius: 70px;
+    z-index: 99999999;
+    position: absolute;
+    right: 24px;
+    top: 7px;
+    opacity: 0.6;
+}
+.thumb .fa-trash {
+    position: absolute;
+    right: 20px;
+    top: 13px;
+    color: #fff;
+    font-size: 18px;
+    transition: 0.3s;
+    z-index: 999999;
+
+}
+.thumb a{
+    position: absolute;
+    right: 50px;
+    top: -100px;
+    color: #fff;
+    font-size: 18px;
+    transition: 0.3s;
+    z-index: 999999;
+    display: block;
+    top: 10px;
+    transition: 0.3;
+}
+.thumb a:hover{
+    cursor: pointer;
+    color: blue;
+}
+
+.thumb .fa-trash:hover{
+    cursor: pointer;
+    color: red;
+}

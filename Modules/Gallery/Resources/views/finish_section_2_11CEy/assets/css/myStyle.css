@@ -1,0 +1,75 @@
+td {
+    vertical-align: middle !important;
+}
+
+.btn-icon {
+    border-radius: 50%;
+}
+
+.demo {
+    width: 450px;
+}
+ul {
+    list-style: none outside none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+li {
+    display: block;
+    float: left;
+    margin-right: 6px;
+    cursor: pointer;
+}
+ul#lightSlider li img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
+ul li.lslide {
+    width: 450px;
+    margin-right: 0px;
+    border: 1px solid #cabebe;
+    border-radius: 13px;
+}
+
+.required {
+    color: red;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.img-old,
+.preview {
+    position: absolute;
+    top: 0;
+    left: calc(100% - 0.5em);
+    height: 38px;
+    width: 38px;
+    object-fit: contain;
+}
+
+.preview,
+.img-old {
+    transition: transform 0.2s;
+}
+
+.preview:hover,
+.img-old:hover {
+    cursor: pointer;
+    transform: scale(700%);
+    z-index: 999;
+}
+
+@media (max-width: 768px) {
+    .input-wrapper input[type='file'] {
+        width: calc(100% - 38px);
+    }
+    .input-wrapper .preview,
+    .input-wrapper .img-old {
+        right: 8px;
+        left: unset;
+    }
+}

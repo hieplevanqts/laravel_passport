@@ -1,0 +1,50 @@
+[
+    {
+        "id": "b1ac7q",
+        "name": "Quần short kaki",
+        "price": "250000",
+        "description": "Short kaki, mặc mùa hè cực mát. Vải kaki mềm bảo đảm mặc không bị ngứa, không bị rút vải khi giặt",
+        "image_main": "jrh3g2e1t.png",
+        "image_extra": [
+            "6ifobnuv7.png",
+            "67inovbuf.png",
+            "oufvi6b7n.png"
+        ]
+    },
+    {
+        "id": "7v4ycu",
+        "name": "Áo thun nam hàn quốc",
+        "price": "225000",
+        "description": "95% cotton,5 % spandex. Khả năng thấm hút tốt. Độ co giãn tốt hơn vì có pha thêm sợi Spandex",
+        "image_main": "hjgte123r.png",
+        "image_extra": [
+            "bo67nvfui.png",
+            "u7io6nbvf.png",
+            "vou6ni7bf.png"
+        ]
+    },
+    {
+        "id": "uynt73",
+        "name": "Áo họa tiết đa sắc",
+        "price": "165000",
+        "description": "Vải mềm mát, nhiều sắc màu, trẻ trung, năng động.",
+        "image_main": "1h3tgre2j.png",
+        "image_extra": [
+            "",
+            "",
+            ""
+        ]
+    },
+    {
+        "id": "vtc7y4",
+        "name": "Áo sơ mi tay dài",
+        "price": "195000",
+        "description": "Được may từ chất liệu vải mềm mát, thoáng khí, thấm hút mồ hôi tốt",
+        "image_main": "rw31s2ade.png",
+        "image_extra": [
+            "",
+            "",
+            ""
+        ]
+    }
+]

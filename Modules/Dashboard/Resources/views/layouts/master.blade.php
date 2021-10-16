@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <title>@yield('title') - VanHiep.NET</title>
     @yield('meta_tags')
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
@@ -100,8 +101,7 @@
           <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
        </div>
     </div>
-    <script
-  src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
     <script type="text/javascript" src="{{ Module::asset('dashboard:scripts/main.js') }}"></script>
     <script type="text/javascript" src="{{ Module::asset('dashboard:js/admin.js') }}"></script>
     <script type="text/javascript" src="{{ Module::asset('dashboard:js/fix_scripts.js') }}"></script>
