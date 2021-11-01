@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('dashboard::layouts.master')
 @php
     use Illuminate\Support\Facades\Config;
     $heading = $title = "Quản lý huyện";
@@ -15,12 +15,13 @@ $breadcrumb =[
 Config::set(['app.breadcrumb'=>$breadcrumb]);
 
 @endphp
-
+@section('title', 'Danh sách huyện')
 
 
 @section('content')
+@includeIf('dashboard::layouts.page_title', ['pageTitle'=>'Danh sách huyện'])
 <div class="row text-right mb-3">
-    <div class="col-md-8">
+    <div class="col-md-12">
 
 
         @if (session('mess'))
@@ -43,34 +44,47 @@ Config::set(['app.breadcrumb'=>$breadcrumb]);
 
         <form action="{{ route('district.index') }}" method="get" id="district_filter">
             @csrf
-        <div class="row">
-                <div class="col-md-3"><input type="text" class="form-control" name="name" placeholder="Tìm theo tên" value="{{ @$_GET['name'] }}" onchange="district_filter()"></div>
-                <div class="col-md-3">
-                    <select name="province" id="" class="form-control" onchange="district_filter()">
-                        <option value="">Chọn tỉnh</option>
-                        @if ($provinces)
-                            @foreach ($provinces as $item)
-                                <option value="{{ $item->id }}" {{ @$item->id==@$_GET['province'] ? 'selected' : '' }}>{{ $item->name }}</option>
-                            @endforeach
-                        @endif
-                    </select>
-                </div>
-                <div class="col-md-2"><button type="submit" class="btn btn-default">Tìm kiếm</button></div>
+            <div class="card card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="name" placeholder="Tìm theo tên" value="{{ @$_GET['name'] }}" onchange="district_filter()">
+                        </div>
+                        <div class="form-group">
+                            <select name="province" id="" class="form-control" onchange="district_filter()">
+                                <option value="">Chọn tỉnh</option>
+                                @if ($provinces)
+                                    @foreach ($provinces as $item)
+                                        <option value="{{ $item->id }}" {{ @$item->id==@$_GET['province'] ? 'selected' : '' }}>{{ $item->name }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary form-control"><i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+
+                    </div>
+            </div>
         </div>
+
     </form>
     </div>
-    <div class="col-md-4">
+    {{-- <div class="col-md-4">
         <button class="btn btn-primary" onclick="addDistrict()"><i class="fas fa-plus"></i> Thêm</button>
-    </div>
+    </div> --}}
 
 </div>
     <div class="card card-outline card-info" id="district_main">
-        <div class="card-body p-0">
-
+        <div class="card-body p-3">
             <table class="table table-bordered table-striped table-hover table-sm">
                 <thead>
                    <tr height="45">
-                      <th width="5%">#</th>
+                      <th width="5%"><input type="checkbox" /></th>
                       <th>
                         Name
                       </th>
@@ -98,13 +112,14 @@ Config::set(['app.breadcrumb'=>$breadcrumb]);
 
                         @endphp
                                 <tr>
-                                    <td>{{ @$limit*20 + $key + 1 }}</td>
+                                    <td><input type="checkbox" name="ids"/></td>
+                                    {{-- {{ @$limit*20 + $key + 1 }} --}}
                                     <td>{{ @$item->name }}</td>
                                     <td>{{ @$item->province->name }}</td>
                                     <td>{{ @$item->province->region }}</td>
                                     <td>
                                         <a onClick="editProvice({{ $item->id }})" href="javascript:void(0)" class="btn btn-warning btn-xs"><i class="fas fa-edit"></i></a>
-                                        <a onclick="return confirm('Bạn có chắc chắn xóa không ?')" href="{{ URL::to('/admin/district/delete') }}/{{ @$item->id }}" class="btn btn-danger btn-xs"><i class="far fa-trash-alt"></i></a>
+                                        <a onclick="return confirm('Bạn có chắc chắn xóa không ?')" href="{{ URL::to('/admin/district/delete') }}/{{ @$item->id }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                         @endforeach

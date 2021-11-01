@@ -1,4 +1,7 @@
 {
     "Gallery": true,
-    "Dashboard": true
+    "Dashboard": true,
+    "Local": true,
+    "Store": true,
+    "Brand": true
 }

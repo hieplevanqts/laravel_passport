@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('dashboard::layouts.master')
 @php
     use Illuminate\Support\Facades\Config;
     $heading = $title = "Quản lý tỉnh";
@@ -13,16 +13,12 @@ $breadcrumb =[
 
 ];
 Config::set(['app.breadcrumb'=>$breadcrumb]);
-
 @endphp
-
-
-
-
+@section('title', 'Danh sách tỉnh')
 @section('content')
+@includeIf('dashboard::layouts.page_title', ['pageTitle'=>'Danh sách tỉnh'])
 <div class="row text-right mb-3">
-    <div class="col-md-8">
-
+    <div class="col-md-12">
         @if (session('mess'))
             <div class="alert alert-success alert-dismissible fade show" role="alert" id="alert_success">
                 {{ session('mess') }}
@@ -40,47 +36,51 @@ Config::set(['app.breadcrumb'=>$breadcrumb]);
                 </button>
             </div>
             @endif
-
-        <form action="{{ route('province.index') }}" method="get" id="province_filter">
-            @csrf
-        <div class="row">
-            <div class="col-md-3"><input type="text" class="form-control" name="name" placeholder="Tìm theo tên" onchange="province_filter()" value="{{ @$_GET['name'] }}"></div>
-            <div class="col-md-3">
-                <select name="area" id="" class="form-control" onchange="province_filter()">
-                    <option value="">Chọn vùng</option>
-                    <option value="1" {{ @$_GET['area']==1 ? "selected":"" }}>Vùng 1</option>
-                    <option value="2" {{ @$_GET['area']==2 ? "selected":"" }}>Vùng 2</option>
-                    <option value="3" {{ @$_GET['area']==3 ? "selected":"" }}>Vùng 3</option>
-                    <option value="4" {{ @$_GET['area']==4 ? "selected":"" }}>Vùng 4</option>
-                </select>
+            <div class="card card-body">
+                <form action="{{ route('province.index') }}" method="get" id="province_filter">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="name" placeholder="Tìm theo tên" onchange="province_filter()" value="{{ @$_GET['name'] }}">
+                            </div>
+                            <div class="form-group">
+                                <select name="area" id="" class="form-control" onchange="province_filter()">
+                                    <option value="">Chọn vùng</option>
+                                    <option value="1" {{ @$_GET['area']==1 ? "selected":"" }}>Vùng 1</option>
+                                    <option value="2" {{ @$_GET['area']==2 ? "selected":"" }}>Vùng 2</option>
+                                    <option value="3" {{ @$_GET['area']==3 ? "selected":"" }}>Vùng 3</option>
+                                    <option value="4" {{ @$_GET['area']==4 ? "selected":"" }}>Vùng 4</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <button class="btn btn-primary form-control"><i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="col-md-2"><button class="btn btn-default">Tìm kiếm</button></div>
-        </div>
-    </form>
+
     </div>
-    <div class="col-md-4">
+    {{-- <div class="col-md-4">
         <button class="btn btn-primary" onclick="addProvince()"><i class="fas fa-plus"></i> Thêm</button>
-    </div>
+    </div> --}}
 
 </div>
     <div class="card card-outline card-info" id="province_main">
-        <div class="card-body p-0">
-
+        <div class="card-body p-3">
             <table class="table table-bordered table-striped table-hover table-sm">
                 <thead>
                    <tr height="45">
-                      <th width="5%">#</th>
-                      <th>
-                        Name
-                      </th>
-                      <th>
-                        Vùng
-                      </th>
-                      <th>
-                         Actions
-                      </th>
+                      <th width="5%"><input type="checkbox" /></th>
+                      <th>Name</th>
+                      <th>Vùng</th>
+                      <th>Actions</th>
                    </tr>
-
                 </thead>
                 <tbody>
                     @if ($list)
@@ -94,20 +94,18 @@ Config::set(['app.breadcrumb'=>$breadcrumb]);
 
                         @endphp
                                 <tr>
-                                    <td>{{ @$limit*20 + $key + 1 }}</td>
+                                    <td><input type="checkbox" /></td>
+                                    {{-- {{ @$limit*20 + $key + 1 }} --}}
                                     <td>{{ @$item->name }}</td>
                                     <td>{{ @$item->region }}</td>
                                     <td>
                                         <a onClick="editProvice({{ $item->id }})" href="javascript:void(0)" class="btn btn-warning btn-xs"><i class="fas fa-edit"></i></a>
-                                        <a onclick="return confirm('Bạn có chắc chắn xóa không ?')" href="{{ URL::to('/admin/province/delete') }}/{{ @$item->id }}" class="btn btn-danger btn-xs"><i class="far fa-trash-alt"></i></a>
+                                        <a onclick="return confirm('Bạn có chắc chắn xóa không ?')" href="{{ URL::to('/admin/province/delete') }}/{{ @$item->id }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                         @endforeach
                    @endif
                 </tbody>
-                <tfoot>
-
-                </tfoot>
              </table>
              <br>
             <div class="text-center pagination__link"> {{ $list->appends(['_token'=>@$_GET['_token'], 'name' => @$_GET['name'], 'area' => @$_GET['area']])->links() }}</div>

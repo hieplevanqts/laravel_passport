@@ -5,7 +5,7 @@ namespace Database\Factories;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-
+use Faker\Factory as Faker;
 class UserFactory extends Factory
 {
     /**
@@ -22,12 +22,21 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $faker = Faker::create();
+        $name = $faker->name;
+        $slug = Str::of($name)->slug('-');
+        $sourceDir = public_path(). '/upload/files/users';
+        $targetDir = public_path() . '/upload/image/users';
         return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+            'name'=>$name,
+            'slug'=>$slug,
+            'email'=>$faker->email,
+            'avatar'=>'upload/image/users/' . $faker->file($sourceDir, $targetDir, false),
+            'address'=>$faker->address,
+            'facebook'=>'facebook',
+            'phone'=>$faker->phoneNumber,
+            'gender'=>$faker->randomElement([0, 1]),
+            'password'=>$faker->password
         ];
     }
 

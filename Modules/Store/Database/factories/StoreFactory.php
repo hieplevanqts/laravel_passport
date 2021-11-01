@@ -4,7 +4,8 @@ namespace Modules\Store\Database\factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Factory as Faker;
 use Illuminate\Support\Str;
-use Modules\User\Entities\Users;
+use App\Models\User;
+
 
 
 class StoreFactory extends Factory
@@ -24,14 +25,13 @@ class StoreFactory extends Factory
     public function definition()
     {
         $faker = Faker::create();
-        // $user = Users::inRandomOrder()->first('id');
+        $user = User::inRandomOrder()->first('id');
         $name = $faker->text(20);
         return [
             "name"=>$name,
             "slug"=>Str::of($name)->slug('-'),
             "avatar"=>$faker->imageUrl(640, 480),
-            // 'user_id' => $user->id,
-            "user_id"=>1,
+            'user_id' => $user->id,
             "banner"=>$faker->imageUrl(1000, 1200),
             "address"=>$faker->address(),
             "phone"=>$faker->e164PhoneNumber(),

@@ -15,7 +15,7 @@ class DashboardDatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
+        $this->call(ProductTableSeeder::class);
 
-        // $this->call("OthersTableSeeder");
     }
 }

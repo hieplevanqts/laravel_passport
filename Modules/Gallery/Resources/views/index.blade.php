@@ -19,6 +19,12 @@ Config::set(['app.menu'=>$menu, 'app.breadcrumb'=>$breadcrumb]);
 
 
 @section('content')
+@includeIf('dashboard::layouts.page_title', [
+    'pageTitle'=>'Thư viện ảnh',
+    'link'=>asset('admin/gallery/add'),
+    'title'=> 'Thêm mới',
+    'icon'=>'<i class="fa fa-plus" aria-hidden="true"></i>'
+    ])
 @push('styles')
 <link href="{{ Module::asset('dashboard:css/fix_style.css') }} " rel="stylesheet">
 <link href="{{ Module::asset('gallery:css/fancy-file-uploader/fancy_fileupload.css') }} " rel="stylesheet">
@@ -31,7 +37,7 @@ Config::set(['app.menu'=>$menu, 'app.breadcrumb'=>$breadcrumb]);
        <div class="card-body">
           <div class="row">
              <div class="col-lg-4">
-                <div class="form-group mb-0">
+                <div class="form-group">
                    <select class="form-control" id="status" name="status" onchange="submit()">
                       <option value="all">--Module--</option>
                       <option value="product">Sản phẩm</option>
@@ -44,14 +50,15 @@ Config::set(['app.menu'=>$menu, 'app.breadcrumb'=>$breadcrumb]);
                       <option value="other">Khác</option>
                    </select>
                 </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary form-control"><i class="fa fa-search"></i> Tìm kiếm</button>
+                </div>
              </div>
              <div class="col-lg-4">
-                <div class="form-group mb-0"><button type="submit" class="btn btn-info"><i class="fa fa-search"></i> Tìm kiếm</button></div>
+
              </div>
              <div class="col-lg-4">
-                 <a href="{{ asset('admin/gallery/add') }}" class="btn btn-success pull-right">
-                    <i class="fa fa-plus" aria-hidden="true"></i> Thêm mới
-                </a>
+
              </div>
           </div>
        </div>
@@ -63,12 +70,22 @@ Config::set(['app.menu'=>$menu, 'app.breadcrumb'=>$breadcrumb]);
         <input type="hidden" name="limit" value="{{ request()->get('limit') ? request()->get('limit') : 20 }}">
 	    <div class="row" id="sortable">
             @foreach ($list as $value)
+                @php
+                    $arr = explode('http', @$value->url);
+                    if(count($arr) > 1)
+                    {
+                        $link = @$value->url;
+                    }else{
+                        $link = URL::to('/').'/'.$value->url;
+                    }
+
+                @endphp
             <div class="col-lg-3 col-md-4 col-xs-6 thumb mt-3" data-index="{{ @$value->id }}" data-position="{{ @$value->sort }}">
                     <div class="wraper-action">
                         <a href="{{  URL::to('/').'/'.$value->url }}" class="image-link"><i class="fa fa-eye" aria-hidden="true"></i></a>
                         <i onclick="deleteGalleryItem(this, {{ @$value->id }})" class="fa fa-trash" aria-hidden="true"></i>
                     </div>
-                    <img src="{{  URL::to('/').'/'.$value->url }}" alt="{{ $value->alt }}">
+                    <img src="{{  @$link }}" alt="{{ $value->alt }}">
 
             </div>
             @endforeach
@@ -116,6 +133,7 @@ Config::set(['app.menu'=>$menu, 'app.breadcrumb'=>$breadcrumb]);
     var limit = $('input[name="limit"]').val();
     var base = $("#base").val()
     var token = $("meta[name='csrf-token']").attr('content');
+
     $(function(){
         $( "#sortable" ).sortable({
             opacity: 0.6,
@@ -129,7 +147,6 @@ Config::set(['app.menu'=>$menu, 'app.breadcrumb'=>$breadcrumb]);
                     }
                 });
                 saveNewPosition();
-                // $.post("/plugins/drag/updateDB.php", order);
             }
         })
     });

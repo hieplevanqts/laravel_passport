@@ -16,7 +16,8 @@ Route::group([
     'prefix' => 'admin',
         // 'middleware' => ['auth','theme:admin'],
     ], function () {
-        Route::prefix('dashboard')->group(function() {
-            Route::get('/', 'DashboardController@index');
-        });
+        Route::get('/', 'DashboardController@index');
+        Route::get('/product', 'ProductController@index');
+        Route::get('/product/add', 'ProductController@create');
+        Route::get('/users', 'UserController@index');
     });

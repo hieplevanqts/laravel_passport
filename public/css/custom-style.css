@@ -1,0 +1,6 @@
+.pagination__link {
+    text-align: center;
+}
+.pagination__link nav{
+    display: inline-block;
+}

@@ -1,23 +1,15 @@
-@extends('layouts.main')
+@extends('dashboard::layouts.master')
 
-@php
-    use Illuminate\Support\Facades\Config;
-    $heading = $title = "Thương hiệu";
-$menu = [
-    ['label' => 'Danh sách', 'url' => url('admin/brand'),'options' => ['class' => 'btn btn-info'], 'icon'=> 'fa-list-alt'],
-        ['label' => 'Thêm mới','url' => url('admin/brand/add'),'options' => ['class' => 'btn btn-info'], 'icon'=> 'fa-plus']
-    ];
-$breadcrumb =[
-    ['label' => "Trang chủ", 'url' => url('/admin')],
-    ['label' => $heading, 'url' => url('/admin/brand')],
-    ['label' => "Danh sách", 'url' => ''],
 
-];
-Config::set(['app.menu'=>$menu, 'app.breadcrumb'=>$breadcrumb]);
-
-@endphp
 @section('title','Thêm thương hiệu')
 @section('content')
+@includeIf('dashboard::layouts.page_title', [
+    'pageTitle'=>'Danh sách thương hiệu',
+    'link'=>asset('admin/brand'),
+    'icon'=>'<i class="fa fa-bars" aria-hidden="true"></i>',
+    'title'=>'Danh sách',
+    'list'=>false
+    ])
 <section class="content">
     <div class="container-fluid">
             <div class="row justify-content-center">
@@ -29,18 +21,18 @@ Config::set(['app.menu'=>$menu, 'app.breadcrumb'=>$breadcrumb]);
         <div class="card-body">
 
             <div class="form-group">
-                <label for="name" class="col-form-label">Tên thương hiệu <span class="text-danger">*</span></label>
-                <input id="name" type="text" name="name" value="{{ @$edit->name }}" class="form-control" placeholder="Tên chuyên mục" required>
+                <label for="name" class="col-form-label"><b>Tên thương hiệu</b> <span class="text-danger">*</span></label>
+                <input id="name" type="text" name="name" value="{{ @$edit->name }}" class="form-control" placeholder="Nhập tên thương hiệu" required>
             </div>
             <div class="form-group">
-                <label for="name" class="col-form-label">Mô tả <span class="text-danger">*</span></label>
+                <label for="name" class="col-form-label"><b>Mô tả</b> <span class="text-danger">*</span></label>
                 <textarea name="description" id="description" cols="30" rows="3" class="form-control" placeholder="Mô tả ngắn...">{{ @$edit->description }}</textarea>
             </div>
 
             <div class="form-group">
                 <div class="row">
                     <div class="col-lg-6">
-                        <label for="type" class="col-form-label">Loại</label>
+                        <label for="type" class="col-form-label"><b>Loại</b></label>
                         <select class="form-control" id="type" name="type" required>
                             <option value="">-- Chọn --</option>
                             @foreach ($data_type as $value)
@@ -53,7 +45,7 @@ Config::set(['app.menu'=>$menu, 'app.breadcrumb'=>$breadcrumb]);
 
             <div class="form-group form-check">
                 <input type="checkbox" name="status" class="form-check-input" id="status" {{ @$edit->status == 1 ? "checked" : ""  }}>
-                <label class="form-check-label" for="status">Kích hoạt</label>
+                <label class="form-check-label" for="status"><b>Kích hoạt</b></label>
             </div>
             <br>
             <div class="form-group">
